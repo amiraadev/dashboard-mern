@@ -117,7 +117,7 @@ function SideBar({
               variant="persistent"
               anchor="left"
               sx={{
-                width:drawerWidth,
+                 width:drawerWidth,
                 "& .MuiDrawer-paper": {
                     color: theme.palette.secondary[200],
                     backgroundColor: theme.palette.background.alt,
@@ -127,7 +127,74 @@ function SideBar({
                   },
               }}
             > 
-             <Box width="100%" >
+            <Box width="100%" >
+                <Box>
+                <FlexBetween color={theme.palette.secondary.main}  m="0.3rem 0.2rem">
+                        <Box display="flex" alignItems="center" >
+                             <Typography variant="h4" fontWeight="bold" >
+                                 MIRAVISION
+                             </Typography>
+                        </Box>
+                         {!isNonMobile && (
+                            <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)} >
+                                <ChevronLeft />
+                            </IconButton>
+                         )}
+                    </FlexBetween>
+                </Box>
+                <List>
+                    {
+                        navItems.map((item) => {
+                            const { text, icon } = item; // Destructure the item object here
+
+                            if (!icon) {
+                              return (
+                                <Typography key={text}  md= "0.4rem 0 0.4rem 3rem"  sx={{
+                                  m: "2.25rem 0 1rem 3rem",
+                                  [theme.breakpoints.up("md")]: {
+                                    m: "0.4rem 0 0.4rem 3rem",
+                                  },
+                                }}>
+                                  {text}
+                                </Typography>
+                              );
+                            }
+                          
+                            const lcText = text.toLowerCase();
+                                                    
+                                                   return (
+                                                    <ListItem key={text} disablePadding>
+                                                             <ListItemButton
+                                                                     onClick={() => {navigate(`/${lcText}`);setActive(lcText)}}
+                                                                     sx={{
+                                                                        backgroundColor:
+                                                                          active === lcText
+                                                                            ? theme.palette.secondary[300]
+                                                                            : "transparent",
+                                                                        color:
+                                                                          active === lcText
+                                                                            ? theme.palette.primary[600]
+                                                                            : theme.palette.secondary[100],
+                                                                      }}
+                                                                     >
+                                                                    <ListItemIcon  sx={{ml:"2rem",color:active === lcText 
+                                                                                 ? theme.palette.primary[600]
+                                                                                 : theme.palette.secondary[200]}}>
+                                                                            {icon}
+                                                                    </ListItemIcon>
+                                                                    <ListItemText primary={text} />
+                                                                         {active === lcText && (
+                                                                                <ChevronRightOutlined sx={{ ml: "auto" }} />
+                                                                             )}
+                                                             </ListItemButton>
+
+                                                    </ListItem>
+                                                   )
+                                                })
+                    }
+                </List>
+            </Box>
+             {/* <Box width="100%" >
                 <Box m="1.5rem 2rem 2rem 3rem">
                     <FlexBetween color={theme.palette.secondary.main} >
                         <Box display="flex" alignItems="center" gap="0.5rem">
@@ -188,7 +255,7 @@ function SideBar({
                                                 })
                     }
                 </List>
-             </Box>
+             </Box> */}
             </Drawer>
         )}
       

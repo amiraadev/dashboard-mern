@@ -13,6 +13,10 @@ import salesRoutes from './routes/sales.js';
 
 import  connectToDB from "./config-db.js";
 
+// DATA IMPORT 
+import User from './models/user.js';
+import {dataUser} from './data/index.js'
+
 dotenv.config();
 const app = express();
 
@@ -37,6 +41,8 @@ const port = process.env.PORT || 5000;
 connectToDB()
 .then(() => { 
     app.listen(port,() => {console.log(`server is listening on port ...${port}`);})
+   //  ONLY ADD DATA ONE TIME
+   //  User.insertMany(dataUser)
    })
 .catch((err) => {
    console.log(err);
