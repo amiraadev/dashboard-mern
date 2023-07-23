@@ -23,7 +23,7 @@ function App() {
             </Route>
         </Routes>
       </BrowserRouter>
-           <ThemeProvider theme={theme} >
+      <ThemeProvider theme={theme} >
           <CssBaseline />
       </ThemeProvider>
     </div>
